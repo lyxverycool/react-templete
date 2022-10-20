@@ -4,8 +4,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { DefinePlugin } = require('webpack');
 const webpack = require('webpack');
 const { resolve } = require('path')
+const os = require("os");
 const resolvePath = (relativePath) => resolve(process.cwd(), relativePath)
 const IS_DEV = process.env.NODE_ENV == 'development'
+
+// cpu核数
+const threads = os.cpus().length;
 
 const bundleTime = function () {
 	const date = new Date()
@@ -38,32 +42,48 @@ module.exports = {
 		}
 	},
 	module: {
-		rules: [
-			{
-				use:IS_DEV ?  ['thread-loader', 'babel-loader?cacheDirectory=true']:'babel-loader?cacheDirectory=true',
-				test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
-			},
-			{
-				test: /\.(css|less)$/,
-				use: [IS_DEV ? 'style-loader' :
+		rules:[{
+			oneOf: [
 				{
-					loader:MiniCssExtractPlugin.loader,
-					options:{
-							publicPath:'../',
+					use:[
+						{
+							loader: "thread-loader", // 开启多进程
+							options: {
+								workers: threads, // 数量
+							},
+						},
+						{
+							loader: "babel-loader",
+							options: {
+								cacheDirectory: true, // 开启babel编译缓存
+							},
+						},
+					], 
+					test: /\.(js|jsx)$/,
+					include: resolvePath('src'),
+					exclude: /node_modules/,
+				},
+				{
+					test: /\.(css|less)$/,
+					use: [IS_DEV ? 'style-loader' :
+					{
+						loader:MiniCssExtractPlugin.loader,
+						options:{
+								publicPath:'../',
+						}
+					}, 'css-loader', 'postcss-loader', 'less-loader'],
+				},
+				{
+					type: 'asset',
+					test: /\.(png|svg|jpg|jpeg|gif)$/i,
+					parser: {
+						dataUrlCondition: {
+							maxSize: 5 * 1024 // 5kb
+						}
 					}
-				}, 'css-loader', 'postcss-loader', 'less-loader'],
-			},
-			{
-				type: 'asset',
-				test: /\.(png|svg|jpg|jpeg|gif)$/i,
-				parser: {
-					dataUrlCondition: {
-						maxSize: 5 * 1024 // 5kb
-					}
-				}
-			},
-		],
+				},
+			]
+		}],
 	},
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
@@ -93,6 +113,8 @@ module.exports = {
 			quiet: IS_DEV ? true : false,
 			extensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'react'],
 			exclude: 'node_modules',
+			cacheLocation:resolvePath("node_modules/.cache/.eslintcache"),
+			cache: true, // 开启缓存
 		}),
 		new webpack.ProgressPlugin({
 			activeModules: false,
