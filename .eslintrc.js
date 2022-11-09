@@ -13,7 +13,7 @@ module.exports = {
         sourceType: 'module',
         project: './tsconfig.json',
     },
-    extends: ['airbnb', 'prettier'],
+    extends: ['airbnb'],
     parser: '@babel/eslint-parser',
     plugins: [
         'react',
