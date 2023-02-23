@@ -31,4 +31,4 @@ export const deepClone = values => {
 }
 
 // 判断是否是中台化环境和友空间环境 不是则用自己的方法
-export const getLaguange=()=>'zh_cn'
+export const getLaguange = () => 'zh_cn'

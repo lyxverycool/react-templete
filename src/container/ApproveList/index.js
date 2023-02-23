@@ -1,11 +1,12 @@
 import React from 'react'
+import { Button, Empty } from 'antd-mobile'
 import './style.less'
 
 const index = () => (
-    <div className="approve">
+    <Button className="approve">
       <div className="list" />
-      2231313111
-    </div>
+      <Empty />
+    </Button>
   )
 
 export default index

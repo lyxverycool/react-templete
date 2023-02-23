@@ -1,9 +1,10 @@
 import React from 'react'
+import { Button } from 'antd-mobile'
 
 const index = () => (
-    <div>
+    <Button>
       2233133
-    </div>
+    </Button>
   )
 
 export default index
