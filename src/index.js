@@ -1,18 +1,10 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import { HashRouter } from 'react-router-dom'
-import Vconsole from 'vconsole'
 import App from './routes'
-import 'lib-flexible'
 import '~/lang/index'
 
-
-// eslint-disable-next-line no-undef
-if (IS_DAILY) {
-	// eslint-disable-next-line no-new
-	new Vconsole()
-}
-const app = document.getElementById('app')
+const root = ReactDOM.createRoot(document.getElementById('app'))
 
 const AppContainer = (
 	<HashRouter>
@@ -20,7 +12,4 @@ const AppContainer = (
 	</HashRouter>
 )
 
-ReactDOM.render(
-	AppContainer,
-	app,
-)
+root.render(AppContainer)

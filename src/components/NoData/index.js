@@ -1,5 +1,5 @@
 import React from 'react'
-import { Empty } from 'antd-mobile'
+import { Empty } from 'antd'
 import { useTranslation } from 'react-i18next'
 import NoDataPng from '~/images/no-data.png'
 import './style.less'

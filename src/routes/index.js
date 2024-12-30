@@ -4,7 +4,6 @@ import routes from './router'
 import UserProvider from '~/store'
 import '../less/normal.less'
 
-// 为了兼容热更新和recoil,定义错误渲染整体样式
 export default class extends Component {
   // state = { hasError: false }
 

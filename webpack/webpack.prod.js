@@ -65,7 +65,7 @@ const prodConfig = {
 			chunks: 'async',
 			cacheGroups: {
 				vendor: {
-					test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom|recoil|axios)[\\/]/,
+					test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom|axios)[\\/]/,
 					name: 'vendor',
 					chunks: 'all',
 				},

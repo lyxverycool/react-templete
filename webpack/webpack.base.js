@@ -82,6 +82,10 @@ module.exports = {
 						}
 					}
 				},
+				{
+					test: /\.(ttf|woff2?|mp3|mp4|avi)$/,
+					type: 'asset/resource',
+				},
 			]
 		}],
 	},

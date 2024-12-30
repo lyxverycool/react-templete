@@ -7,11 +7,11 @@ export default [
   {
     path: '/',
     exact: true,
-    component: loadContainer('ApproveList')
+    component: loadContainer('Home')
   },
   {
     path: '/create',
     exact: true,
-    component: loadContainer('Home')
+    component: loadContainer('ApproveList')
   }
 ]

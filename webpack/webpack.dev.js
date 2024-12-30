@@ -16,8 +16,8 @@ const devConfig = {
 		},
 		compress: true,
 		proxy: {
-			'/baidu': {
-				target: 'https://baidu.com',
+			'/api': {
+				target: 'http://localhost:3002',
 				changeOrigin: true,
 			},
 		},

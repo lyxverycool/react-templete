@@ -3,7 +3,7 @@ import axios from 'axios'
 import { getLaguange } from '~/utils'
 
 const http = axios.create({
-  baseURL: '/yonbip-ec-iform'
+  baseURL: '/api'
 })
 const fetch = ({ url, params, method = 'GET', data }) => {
   const options = {
